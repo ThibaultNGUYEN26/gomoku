@@ -34,6 +34,7 @@ export default function Board2D({ onBack }){
         </div>
 
         {/* Grid lines layer (SVG for crisp scaling) */}
+        {/* Use a tight viewBox so coordinates (0..18) align exactly with percent-based intersections */}
         <svg className="grid-lines" viewBox="0 0 18 18" aria-hidden="true">
           {/* Vertical lines (19 lines => 18 intervals; edges at 0 and 18) */}
           {Array.from({ length: 19 }, (_, i) => (

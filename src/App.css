@@ -381,8 +381,8 @@ body {
 }
 
 .board-wrap {
-  --board-pad: 20px;          /* dark border thickness */
-  --grid-gap: 32px;          /* space from border to grid lines */
+  --board-pad: 20px;
+  --grid-gap: 32px;
   --grid-lines-inset: calc(var(--board-pad) + var(--grid-gap));
   position: relative;
   width: min(88vmin, 900px);
@@ -396,7 +396,7 @@ body {
 
 .board-grid {
   position: absolute;
-  inset: var(--board-pad); /* expand light brown area */
+  inset: var(--board-pad);
   z-index: 1;
   pointer-events: none;
   border-radius: 12px;
@@ -425,14 +425,14 @@ body {
   position: absolute;
   inset: var(--grid-lines-inset);
   z-index: 1;
-  width: calc(100% - (var(--grid-lines-inset) * 2));
-  height: calc(100% - (var(--grid-lines-inset) * 2));
   display: block;
   pointer-events: none;
+  overflow: visible;
 }
 .grid-lines line {
   stroke: rgba(90,61,20,.65);
-  stroke-width: .03;
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1px;
   shape-rendering: crispEdges;
 }
 
