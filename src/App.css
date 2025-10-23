@@ -375,15 +375,22 @@ body {
 
 .board-page {
   width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-items: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .bot-timer {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 58px;
+  right: 50px;
+  width: clamp(200px, 22vw, 320px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: .55rem .95rem;
   font: 600 clamp(14px, 1.6vw, 18px)/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   letter-spacing: .06em;
@@ -398,6 +405,69 @@ body {
   pointer-events: none;
   user-select: none;
   z-index: 50;
+}
+
+.bot-log-box {
+  position: absolute;
+  top: 130px;
+  right: 50px;
+  height: 80vh;
+  width: clamp(200px, 22vw, 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: .65rem .75rem .7rem;
+  border-radius: 22px;
+  font: 500 13px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  border: 10px solid #8E6A2F;
+  background:
+    linear-gradient(180deg, #E3BE68 0%, #CDA255 55%, #E3BE68 100%),
+    radial-gradient(140% 140% at 50% 130%, rgba(0,0,0,.18), transparent 65%);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  color: #111;
+  box-shadow:
+    0 2px 6px -1px rgba(0,0,0,.4),
+    0 8px 26px -6px rgba(0,0,0,.45),
+    0 1px 0 rgba(255,255,255,.25) inset;
+  overflow: hidden;
+  backdrop-filter: blur(4px) saturate(140%);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.35) rgba(255,255,255,.35);
+  z-index: 40;
+}
+
+.bot-log-box::-webkit-scrollbar {
+  width: 8px;
+}
+.bot-log-box::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.08);
+  border-radius: 10px;
+}
+.bot-log-box::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.28);
+  border-radius: 10px;
+}
+
+.bot-log-line {
+  position: relative;
+  padding: 4px 6px 5px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.55);
+  color: #222;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25) inset, 0 1px 2px -1px rgba(0,0,0,.4);
+  animation: fadeIn .35s ease;
+}
+.bot-log-line.ghost {
+  opacity: .6;
+  font-style: italic;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .bot-timer::before {
