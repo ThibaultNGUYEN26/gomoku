@@ -435,22 +435,11 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,.35) rgba(255,255,255,.35);
+  scrollbar-width: none;
   z-index: 40;
 }
 
-.bot-log-box::-webkit-scrollbar {
-  width: 8px;
-}
-.bot-log-box::-webkit-scrollbar-track {
-  background: rgba(0,0,0,.08);
-  border-radius: 10px;
-}
-.bot-log-box::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.28);
-  border-radius: 10px;
-}
+.bot-log-box::-webkit-scrollbar { display: none; }
 
 .bot-log-line {
   position: relative;
