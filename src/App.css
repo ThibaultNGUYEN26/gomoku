@@ -380,6 +380,32 @@ body {
   place-items: center;
 }
 
+.bot-timer {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: .55rem .95rem;
+  font: 600 clamp(14px, 1.6vw, 18px)/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  letter-spacing: .06em;
+  border-radius: 14px;
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  backdrop-filter: blur(6px) saturate(140%);
+  box-shadow:
+    0 1px 2px -1px rgba(0,0,0,.5),
+    0 4px 14px -2px rgba(0,0,0,.4),
+    0 0 0 1px rgba(255,255,255,.12) inset;
+  pointer-events: none;
+  user-select: none;
+  z-index: 50;
+}
+
+.bot-timer::before {
+  content: "⏱";
+  margin-right: .45rem;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.4));
+}
+
 .board-wrap {
   --board-pad: 20px;
   --grid-gap: 32px;
