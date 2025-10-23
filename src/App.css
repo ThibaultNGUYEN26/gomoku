@@ -375,12 +375,62 @@ body {
 
 .board-page {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+}
+
+.board-with-side {
+  --board-size: min(88vmin, 900px);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 52px);
+  padding: 0 clamp(28px, 5vw, 80px);
+  height: var(--board-size);
+}
+
+@media (max-width: 960px) {
+  .board-with-side {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: clamp(16px,4vw,32px) 24px 40px;
+  }
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  width: clamp(200px, 22vw, 320px); /* unified with timer width */
+  height: var(--board-size);
+}
+
+@media (max-width: 960px) {
+  .side-panel { width: 100%; max-width: 700px; }
+}
+
+.bot-timer.side {
+  position: relative;
+  top: 0;
+  right: auto;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: .65rem .95rem;
+  pointer-events: none;
+}
+
+.bot-log-box.side {
+  position: relative;
+  top: 0;
+  right: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  width: 100%;
 }
 
 .bot-timer {
