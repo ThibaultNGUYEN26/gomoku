@@ -405,7 +405,7 @@ body {
 .side-panel {
   display: flex;
   flex-direction: column;
-  width: clamp(200px, 22vw, 320px); /* unified with timer width */
+  width: clamp(200px, 22vw, 320px);
   height: var(--board-size);
 }
 
