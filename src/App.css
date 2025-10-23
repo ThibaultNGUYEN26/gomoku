@@ -445,7 +445,7 @@ body {
   font: 600 clamp(14px, 1.6vw, 18px)/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   letter-spacing: .06em;
   border-radius: 14px;
-  background: rgba(0,0,0,.35);
+  background: #8E6A2F;
   color: #fff;
   backdrop-filter: blur(6px) saturate(140%);
   box-shadow:
