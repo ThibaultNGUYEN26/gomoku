@@ -1,34 +1,18 @@
-import { useEffect, useState } from "react";
 import useBoard, { BOARD_SIZE } from "../hooks/useBoard.js";
+import useBotThinking from "../hooks/useBotThinking.js";
+import BotPanel from "./BotPanel.jsx";
 
 export default function Board2D({ onBack }){
   const { size, stones, hover, setHover, turn, place, cells } = useBoard(BOARD_SIZE);
 
-  const BOT_START_SECONDS = 0;
-  const [botTime, setBotTime] = useState(BOT_START_SECONDS);
-
-  useEffect(() => {
-    if (turn === "white") {
-      setBotTime(BOT_START_SECONDS);
-    }
-  }, [turn]);
-
-  useEffect(() => {
-    if (turn !== "white") 
-      return;
-    const id = setInterval(() => {
-      setBotTime(t => t + 1);
-    }, 1000);
-    return () => clearInterval(id);
-  }, [turn]);
+  // Bot thinking hook (timer + logs)
+  const { botTime, botLogs, addBotLog } = useBotThinking(turn);
 
   return (
     <div className="board-page">
       <button className="hud-exit" onClick={onBack} aria-label="Back to menu">←</button>
 
-      <div className="bot-timer" aria-label="Bot reflection time">
-        {turn === "white" ? `BOT THINKING: ${botTime}s` : "YOUR TURN"}
-      </div>
+      <BotPanel turn={turn} botTime={botTime} botLogs={botLogs} />
 
       <div className="board-wrap">
         <div className="board-grid" aria-hidden="true" />
