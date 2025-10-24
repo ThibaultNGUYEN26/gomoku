@@ -22,7 +22,7 @@ export default function Board2D({ onBack }) {
       <div className="board-with-side panels-left-right">
         <div className="side-panel bot-side" aria-label="Bot log panel">
           <div className="history-panel" aria-label="Bot thinking log">
-            <div className="history-header">Bot Log</div>
+            <div className="history-header">Bot Logs</div>
             <div className="history-scroll">
               {botLogs.length === 0 && turn === 'white' && (
                 <div className="history-line empty">No details yet</div>
