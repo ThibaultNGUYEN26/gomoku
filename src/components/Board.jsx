@@ -1,9 +1,11 @@
+import React from "react";
 import useBoard, { BOARD_SIZE } from "../hooks/useBoard.js";
 import useBotThinking from "../hooks/useBotThinking.js";
 import HistoryPanel from "./HistoryPanel.jsx";
 
 export default function Board2D({ onBack }) {
   const { stones, hover, setHover, turn, place, cells } = useBoard(BOARD_SIZE);
+  const [highlightKey, setHighlightKey] = React.useState(null);
   const { botTime, botLogs } = useBotThinking(turn);
 
   const movesRaw = Object.entries(stones).map(([key, color]) => {
@@ -48,7 +50,7 @@ export default function Board2D({ onBack }) {
                   onClick={() => place(key)}
                   aria-label={`Intersection ${r + 1},${c + 1}`}
                 >
-                  {placed && <span className={`stone ${placed}`} />}
+                  {placed && <span className={`stone ${placed} ${highlightKey === key ? 'highlight' : ''}`} />}
                   {isHover && <span className={`stone ghost ${turn}`} />}
                 </button>
               );
@@ -78,7 +80,11 @@ export default function Board2D({ onBack }) {
           </div>
         </div>
         <div className="side-panel history-side" aria-label="History panel">
-          <HistoryPanel moves={moves} />
+          <HistoryPanel
+            moves={moves}
+            onHoverMove={(key) => setHighlightKey(key)}
+            onLeaveMove={() => setHighlightKey(null)}
+          />
         </div>
       </div>
     </div>
