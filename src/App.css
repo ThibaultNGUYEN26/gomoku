@@ -58,6 +58,66 @@ body {
     normal, normal, multiply, soft-light, normal;
 }
 
+.menu-stone, .inline-stone {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.inline-stone {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.inline-stone + .inline-stone {
+  margin-left: 0;
+}
+
+.inline-stone:first-of-type {
+  margin-left: .35em;
+}
+
+.inline-stone:last-of-type {
+  margin-right: .35em;
+}
+
+.stone-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.stone-group .inline-stone:first-child {
+  margin-left: .35em;
+}
+
+.stone-group .inline-stone:last-child {
+  margin-right: .35em;
+}
+
+.menu-stone.black, .inline-stone.black {
+  background-image:
+    radial-gradient(120% 120% at 35% 30%, rgba(255,255,255,.22) 0 45%, rgba(255,255,255,0) 60%),
+    radial-gradient(140% 140% at 70% 75%, rgba(0,0,0,.35), transparent 60%),
+    linear-gradient(180deg, #2F2F2F, #1E1E1E 55%, #0B0B0B);
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+}
+
+.menu-stone.white, .inline-stone.white {
+  background-image:
+    radial-gradient(120% 120% at 35% 28%, rgba(255,255,255,.75) 0 35%, rgba(255,255,255,0) 65%),
+    linear-gradient(180deg, #FFFDF6, #F4F0E3 55%, #E4DECC);
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-stone, .inline-stone { box-shadow: 0 4px 10px rgba(0,0,0,.28); }
+}
+
 .header-bar {
   position: relative;
   display: flex;
