@@ -647,7 +647,7 @@ body {
   z-index: 4;
 }
 
-.board-overlay{
+.board-overlay {
   pointer-events: none;
   position: absolute;
   inset: var(--grid-lines-inset);
@@ -722,7 +722,45 @@ body {
   box-shadow: 0 6px 14px rgba(0,0,0,.25);
 }
 
-.stone.ghost{
+.stone.ghost {
   opacity: 0.55;
   outline: 2px dashed rgba(0,0,0,.15);
+}
+
+.stone.highlight {
+  outline: 3px solid rgba(255,255,255,.70);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.55),
+    0 0 0 7px rgba(90,61,20,.45),
+    0 10px 22px -6px rgba(0,0,0,.55);
+  animation: pulse-highlight 1.4s ease-in-out infinite;
+}
+.stone.highlight.black {
+  outline: 3px solid rgba(255,255,255,.85);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.65),
+    0 0 0 7px rgba(90,61,20,.45),
+    0 12px 24px -6px rgba(0,0,0,.6);
+}
+.stone.highlight.white {
+  outline: 3px solid rgba(0,0,0,.65);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.55),
+    0 0 0 7px rgba(255,255,255,.55),
+    0 12px 24px -6px rgba(0,0,0,.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stone.highlight {
+    animation: none;
+  }
+}
+
+@keyframes pulse-highlight {
+  0%,100% {
+    filter: brightness(1.05);
+  }
+  50% {
+    filter: brightness(1.22);
+  }
 }
