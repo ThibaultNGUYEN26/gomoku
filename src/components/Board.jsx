@@ -1,16 +1,37 @@
 import useBoard, { BOARD_SIZE } from "../hooks/useBoard.js";
 import useBotThinking from "../hooks/useBotThinking.js";
-import BotPanel from "./BotPanel.jsx";
+import HistoryPanel from "./HistoryPanel.jsx";
 
 export default function Board2D({ onBack }) {
   const { stones, hover, setHover, turn, place, cells } = useBoard(BOARD_SIZE);
   const { botTime, botLogs } = useBotThinking(turn);
 
+  const movesRaw = Object.entries(stones).map(([key, color]) => {
+    const [r, c] = key.split('-').map(Number);
+    const colLetter = String.fromCharCode('A'.charCodeAt(0) + c);
+    const coord = `${colLetter}${r + 1}`;
+    return { key, color, coord };
+  });
+  const moves = movesRaw.map((m, idx) => ({ ...m, index: idx + 1 })).reverse();
+
   return (
     <div className="board-page">
       <button className="hud-exit" onClick={onBack} aria-label="Back to menu">←</button>
-      <div className="board-with-side">
-  <div className="board-wrap" style={{ width: 'var(--board-size)' }}>
+      <div className="board-with-side panels-left-right">
+        <div className="side-panel bot-side" aria-label="Bot log panel">
+          <div className="history-panel" aria-label="Bot thinking log">
+            <div className="history-header">Bot Log</div>
+            <div className="history-scroll">
+              {botLogs.length === 0 && turn === 'white' && (
+                <div className="history-line empty">No details yet</div>
+              )}
+              {botLogs.map(({ t, msg }, i) => (
+                <div key={t + '-' + i} className="history-line">{msg}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="board-wrap" style={{ width: 'var(--board-size)' }}>
           <div className="board-grid" aria-hidden="true" />
           <div className="board-intersections">
             {cells.map(({ r, c, key }) => {
@@ -56,28 +77,10 @@ export default function Board2D({ onBack }) {
             })()}
           </div>
         </div>
-        <div className="side-panel" aria-label="Timer and bot logs">
-          <div className="bot-timer side" aria-label="Bot reflection time">
-            {turn === 'white' ? `BOT THINKING: ${formatBotTime(botTime)}` : 'YOUR TURN'}
-          </div>
-          <div className="bot-log-box side" aria-label="Bot thinking details">
-            {botLogs.length === 0 && turn === 'white' && (
-              <div className="bot-log-line ghost">(no details yet)</div>
-            )}
-            {botLogs.map(({ t, msg }, i) => (
-              <div key={t + '-' + i} className="bot-log-line">{msg}</div>
-            ))}
-          </div>
+        <div className="side-panel history-side" aria-label="History panel">
+          <HistoryPanel moves={moves} />
         </div>
       </div>
     </div>
   );
-}
-
-function formatBotTime(t){
-  const m = Math.floor(t / 60);
-  const s = t % 60;
-  if (m === 0) return `${s}s`;
-  if (s === 0) return `${m}m`;
-  return `${m}m ${s}s`;
 }
